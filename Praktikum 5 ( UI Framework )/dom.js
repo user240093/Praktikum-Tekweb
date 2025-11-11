@@ -1,37 +1,29 @@
-// Ambil elemen tombol dan menu
+// === Hamburger Menu ===
 const menuBtn = document.getElementById('menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 
 menuBtn.addEventListener('click', () => {
-  mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('hidden');
 });
 
+// Tutup menu otomatis setelah klik link
 document.querySelectorAll('#mobile-menu a').forEach(link => {
-  link.addEventListener('click', () => {
+    link.addEventListener('click', () => {
     mobileMenu.classList.add('hidden');
   });
 });
 
-// ===== Fade-in Animation saat Scroll =====
+// === Fade-in Animasi saat Scroll ===
 window.addEventListener('scroll', () => {
-  const projectContainer = document.getElementById('project-container');
-  const position = projectContainer.getBoundingClientRect().top;
-  const screenHeight = window.innerHeight;
+    const cards = document.querySelectorAll('.fade-card');
+  const triggerBottom = window.innerHeight * 0.85;
 
-  if (position < screenHeight - 100) {
-    projectContainer.classList.remove('opacity-0', 'translate-y-10');
-    projectContainer.classList.add('opacity-100', 'translate-y-0');
-  }
-});
+    cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
 
-// Toggle menu mobile
-menuBtn.addEventListener('click', () => {
-  mobileMenu.classList.toggle('hidden');
-});
-
-// Tutup menu otomatis saat klik link navigasi
-document.querySelectorAll('#mobile-menu a').forEach(link => {
-  link.addEventListener('click', () => {
-    mobileMenu.classList.add('hidden');
-  });
+    if (cardTop < triggerBottom) {
+        card.classList.remove('opacity-0', 'translate-y-10');
+        card.classList.add('opacity-100', 'translate-y-0');
+    }
+    });
 });
